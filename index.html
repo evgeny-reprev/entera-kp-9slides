@@ -1,0 +1,236 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Entera-KP-9slides</title>
+<style>
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild6263-3465-4333-b466-323766373138/Gilroy-Thin.woff') format('woff');font-weight:100;font-style:normal}
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild3830-6130-4434-a332-396462303836/Gilroy-Light.woff') format('woff');font-weight:300;font-style:normal}
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild3062-3234-4661-a333-316433636331/Gilroy-Regular.woff') format('woff');font-weight:400;font-style:normal}
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild6138-3439-4137-b339-393230623462/Gilroy-Medium.woff') format('woff');font-weight:500;font-style:normal}
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild3562-6663-4363-b565-396464396666/Gilroy-SemiBold.woff') format('woff');font-weight:600;font-style:normal}
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild3231-3462-4338-a461-663265666664/Gilroy-Bold.woff') format('woff');font-weight:700;font-style:normal}
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild3061-6333-4061-b338-346630353864/Gilroy-ExtraBold.woff') format('woff');font-weight:800;font-style:normal}
+@font-face{font-family:'Gilroy';src:url('https://static.tildacdn.com/tild6561-6461-4236-a163-653662326666/Gilroy-Black.woff') format('woff');font-weight:900;font-style:normal}
+:root{
+  --bg:#fff;--surface:#fff;--surface-muted:#f3f3f3;--surface-muted-2:#e0e6ed;--surface-muted-3:#dcdcdc;
+  --fg:#212121;--dark:#273743;--dark-2:#293741;--muted:#7d7d7d;--muted-2:#c9c9c9;
+  --brand:#00b482;--brand-2:#00b583;--brand-3:#0eda93;--shadow:0 12px 28px rgba(30,35,66,.12);--r:22px
+}
+*{box-sizing:border-box} html,body{height:100%;margin:0;background:var(--dark-2)}
+body{font-family:'Gilroy',Arial,sans-serif;color:var(--fg)}
+.deck{width:100%;height:100%;display:grid;place-items:center}
+.viewport{width:100vw;height:100vh;display:grid;place-items:center;overflow:hidden}
+.slides{width:1920px;height:1080px;position:relative;background:var(--bg);transform-origin:top left}
+.slide{position:absolute;inset:0;padding:88px 110px;display:none;background:var(--surface)}
+.slide.active{display:block}
+h1{margin:18px 0 20px;font-size:68px;line-height:1.06;font-weight:800;max-width:1500px}
+h2{margin:0 0 28px;font-size:56px;line-height:1.1;font-weight:800;max-width:1450px}
+p,li{font-size:36px;line-height:1.35;font-weight:500}
+ul{margin:18px 0 0 28px;padding:0}
+li{margin:12px 0}
+.kicker{font-size:44px;font-weight:700;color:var(--dark);margin-top:26px}
+.value{margin-top:26px;padding:20px 28px;border-radius:999px;background:var(--surface-muted);display:inline-block;font-size:34px;font-weight:600}
+.brandbar{position:absolute;left:0;right:0;top:0;height:22px;background:var(--brand-2)}
+.brandbar.bottom{top:auto;bottom:0}
+.logo{height:68px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.card{background:var(--surface);border:1px solid var(--surface-muted-2);border-radius:var(--r);padding:30px;box-shadow:var(--shadow)}
+.small{font-size:30px;font-weight:500}
+.em{color:var(--brand);font-weight:800}
+.tbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:30px}
+.tbl th,.tbl td{border:1px solid var(--surface-muted-3);padding:16px 18px;text-align:left;vertical-align:top}
+.tbl th{background:var(--surface-muted);font-size:30px;font-weight:700}
+.note{margin-top:24px;font-size:30px;font-weight:600;color:var(--dark)}
+.cta{background:var(--brand-2);color:var(--surface);border-radius:30px;padding:22px 32px;font-size:40px;font-weight:700;display:inline-block}
+.controls{position:fixed;left:16px;right:16px;bottom:10px;display:flex;justify-content:space-between;align-items:center;color:var(--surface);font:500 14px Gilroy,Arial,sans-serif}
+button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
+.print-mode .deck{display:block}
+.print-mode .viewport{display:block;width:auto;height:auto;overflow:visible}
+.print-mode .slides{transform:none !important;width:1920px;height:auto}
+.print-mode .slide{position:relative;display:block;page-break-after:always}
+.print-mode .slide:last-child{page-break-after:auto}
+.print-mode .controls{display:none}
+.print-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#273743;color:#fff;padding:12px 20px;font-size:15px;display:none;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.print-banner kbd{background:#111;padding:2px 8px;border-radius:6px;font-size:13px;font-family:inherit}
+@media print {
+  @page{size:16in 9in;margin:0}
+  html,body{height:auto;background:var(--surface)}
+  .controls{display:none}
+  .deck,.viewport{display:block !important;width:auto !important;height:auto !important;overflow:visible !important}
+  .slides{position:static !important;transform:none !important;width:1920px !important;height:auto !important}
+  .slide{
+    position:relative !important;
+    display:block !important;
+    width:1920px !important;
+    height:1080px !important;
+    min-height:1080px !important;
+    max-height:1080px !important;
+    overflow:hidden !important;
+    break-after:page;
+    page-break-after:always;
+  }
+  .slide:last-child{page-break-after:auto}
+  .print-banner{display:none !important}
+}
+</style>
+</head>
+<body>
+<div id="print-banner" class="print-banner" role="region" aria-label="Экспорт в PDF">
+  <span><strong>PDF:</strong> <kbd>Ctrl</kbd>+<kbd>P</kbd> (Mac: <kbd>⌘</kbd>+<kbd>P</kbd>) → принтер «Сохранить как PDF». Имя файла: <strong>Entera-KP-9slides.pdf</strong></span>
+  <button type="button" id="do-print" style="background:#00b482;color:#fff;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;font-weight:700;font-family:inherit">Открыть печать / PDF</button>
+</div>
+<div class="deck"><div class="viewport"><main class="slides" id="slides">
+<section class="slide active" data-screen-label="01 Титул"><div class="brandbar"></div>
+  <img class="logo" src="assets/logo-entera-from-site.svg" alt="Entera" />
+  <h1>Вы теряете сделки, пока ваши менеджеры вбивают спецификации вручную?</h1>
+  <div class="kicker">Один быстрый съедает 2 умных</div>
+  <div class="value">Автоматизация B2B-запросов с точностью 98% и экономией 70% времени отдела продаж</div>
+  <div class="brandbar bottom"></div>
+</section>
+
+<section class="slide" data-screen-label="02 Боль"><div class="brandbar"></div>
+  <h2>Каждая ручная спецификация стоит вам:</h2>
+  <ul>
+    <li><strong>45 минут</strong> рабочего времени менеджера</li>
+    <li><strong>3%</strong> вероятности ошибки в артикуле (возвраты, скандалы)</li>
+    <li>И главное — <strong>потерю клиента</strong>, который не дождался счёта</li>
+  </ul>
+  <div class="card" style="margin-top:34px;background:var(--surface-muted);border-color:var(--surface-muted-2)">
+    <p style="margin:0;font-size:40px;font-weight:700">Результат: отдел продаж захлебывается в рутине, а новые клиенты уходят к конкурентам с ботами.</p>
+  </div>
+</section>
+
+<section class="slide" data-screen-label="03 Решение"><div class="brandbar"></div>
+  <h2>Решение</h2>
+  <p>AI-бот Entera принимает PDF, фото, Excel → распознаёт любой формат спецификации с точностью <span class="em">98%</span> → сверяет с <strong>1С</strong> → подбирает комплектацию и аналоги → формирует счёт.</p>
+  <p>Менеджер только нажимает «Отправить».</p>
+  <p>В режиме полного авто — даже этого не нужно.</p>
+  <div class="cta" style="margin-top:28px">Счёт клиенту через 2 минуты вместо 2 часов</div>
+</section>
+
+<section class="slide" data-screen-label="04 Как работает"><div class="brandbar"></div>
+  <h2>Как это работает</h2>
+  <ol style="margin:0 0 0 30px;padding:0">
+    <li style="font-size:33px;margin:10px 0">Клиент кидает файл в <strong>Telegram-бота</strong>.</li>
+    <li style="font-size:33px;margin:10px 0">Бот через <strong>10 секунд</strong> показывает распознанные позиции.</li>
+    <li style="font-size:33px;margin:10px 0">Клиент подтверждает <strong>голосом</strong> или в чате.</li>
+    <li style="font-size:33px;margin:10px 0">Бот проверяет остатки, предлагает <strong>аналоги</strong>.</li>
+    <li style="font-size:33px;margin:10px 0">Счёт готов → менеджер <strong>визирует одним кликом</strong>.</li>
+  </ol>
+  <div class="grid2" style="margin-top:22px">
+    <div class="card"><p class="small" style="margin:0"><strong>Роль менеджера:</strong> Всё, что делает менеджер — тратит <strong>15 секунд</strong> на проверку.</p></div>
+    <div class="card"><p class="small" style="margin:0"><strong>Плюс умный валидатор:</strong> бот сам находит логические нестыковки (например, 1+1≠3) и исправляет до формирования счёта.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-screen-label="05 P&L"><div class="brandbar"></div>
+  <h2>Цифры, которые изменят ваш P&amp;L</h2>
+  <table class="tbl"><thead><tr><th>Что меняется</th><th>Было</th><th>Стало</th></tr></thead><tbody>
+    <tr><td>Время на 1 спецификацию</td><td>45 мин</td><td>2 мин</td></tr>
+    <tr><td>Спецификаций в день на менеджера</td><td>3</td><td>15</td></tr>
+    <tr><td>Ошибки при переносе</td><td>до 5%</td><td>&lt;1%</td></tr>
+    <tr><td>Экономия ФОТ в месяц (отдел 5 чел)</td><td>0</td><td>~1,5 млн тенге</td></tr>
+  </tbody></table>
+  <div class="note">Высвобождаем одного менеджера для реальных продаж, не нанимая нового.</div>
+</section>
+
+<section class="slide" data-screen-label="06 Бесплатный пилот"><div class="brandbar"></div>
+  <h2>Бесплатный пилот — вам нечем рисковать</h2>
+  <p style="margin-bottom:10px"><strong>Что вы получаете бесплатно:</strong></p>
+  <ul>
+    <li>✅ Полноценное развёртывание бота в вашем <strong>Telegram-канале</strong></li>
+    <li>✅ Интеграцию с вашей <strong>1С</strong> (без ограничений по номенклатуре)</li>
+    <li>✅ Обработку до <strong>25 страниц</strong> реальных спецификаций ваших клиентов</li>
+    <li>✅ Дашборд с экономией времени и денег</li>
+  </ul>
+  <div class="grid2" style="margin-top:20px">
+    <div class="card"><p style="margin:0;font-size:34px"><strong>Срок пилота:</strong> 7 дней</p></div>
+    <div class="card"><p style="margin:0;font-size:34px"><strong>Условие:</strong> Платите 0 тенге. Через 7 дней решаете — оставить или отключить.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-screen-label="07 Цена"><div class="brandbar"></div>
+  <h2>Прозрачная цена — платите только за реально обработанные страницы</h2>
+  <div class="card" style="margin-bottom:24px">
+    <p style="margin:0 0 8px;font-size:38px"><strong>Стартовый пакет:</strong></p>
+    <p style="margin:8px 0;font-size:36px">📄 <strong>4 800 страниц</strong> распознавания в год</p>
+    <p style="margin:8px 0;font-size:36px">💰 <strong>500 000</strong> тенге в год</p>
+  </div>
+  <p><strong>Что это значит для вас:</strong></p>
+  <ul>
+    <li>В месяц — до <strong>400</strong> страниц (хватит на <strong>100–200</strong> сложных спецификаций)</li>
+    <li>В среднем менее <strong>100</strong> тенге за страницу</li>
+    <li>Страница — это <strong>лист спецификации</strong>, неважно, сколько позиций на ней</li>
+    <li>Вы платите только за то, что распознали. Неиспользованные страницы переносятся на следующий месяц.</li>
+  </ul>
+</section>
+
+<section class="slide" data-screen-label="08 Почему Entera"><div class="brandbar"></div>
+  <h2>Почему Entera — а не другой бот?</h2>
+  <ul>
+    <li>Распознаём не просто текст, а <strong>смысл</strong>. Понимаем «аналог», «заменить на», «поставьте 2, если нет 3».</li>
+    <li>Подбираем аналоги <strong>автоматически</strong> из вашей 1С, если товара нет.</li>
+    <li><strong>Дообучаемся</strong> на ваших правках — точность растёт с каждым днём.</li>
+    <li>Работаем с вашей <strong>1С</strong> (УТ, КА, ERP, включая доработанную).</li>
+    <li>Возможна <strong>доработка</strong> под ваши условия — адаптируем логику, отчёты, интеграцию.</li>
+    <li><strong>Безопасность:</strong> файлы не храним, работаем через защищённый Telegram API.</li>
+  </ul>
+</section>
+
+<section class="slide" data-screen-label="09 Контакты"><div class="brandbar"></div>
+  <img class="logo" src="assets/logo-entera-from-site.svg" alt="Entera" />
+  <h2>Контакты — запустите пилот за 2 минуты</h2>
+  <p>🌐 <strong>Сайт:</strong> https://entera.kz/</p>
+  <p>📞 <strong>WhatsApp / Telegram:</strong> +7 747 812 4933</p>
+  <p style="margin-top:22px"><strong>Что сделать прямо сейчас:</strong></p>
+  <ul>
+    <li>👉 Напишите в Telegram <strong>+7 747 812 4933</strong> слово «<strong>Пилот</strong>» и пришлите <strong>одну любую</strong> спецификацию.</li>
+    <li>Мы обработаем до <strong>25 страниц</strong> в течение <strong>7 дней</strong> — бесплатно.</li>
+    <li>Без презентаций и созвонов. Просто напишите.</li>
+  </ul>
+  <div class="brandbar bottom"></div>
+</section>
+</main></div></div>
+
+<div class="controls"><button id="prev">← Назад</button><div id="counter">1 / 9</div><div><button id="print-all" title="Откроется версия для печати; затем Ctrl+P → Сохранить как PDF">Скачать PDF (9 слайдов)</button> <button id="next">Вперёд →</button></div></div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const params=new URLSearchParams(location.search);
+const printMode=params.get('print')==='1';
+let i=+(localStorage.getItem('entera-kp-slide')||0);
+const s=document.getElementById('slides');
+const v=document.querySelector('.viewport');
+const c=document.getElementById('counter');
+function fit(){const k=Math.min(v.clientWidth/1920,v.clientHeight/1080);s.style.transform=`scale(${k})`;}
+function show(n){
+  i=(n+slides.length)%slides.length;
+  slides.forEach((el,idx)=>el.classList.toggle('active',idx===i));
+  c.textContent=`${i+1} / ${slides.length}`;
+  localStorage.setItem('entera-kp-slide',String(i));
+}
+window.addEventListener('resize',fit);
+const banner=document.getElementById('print-banner');
+const doPrint=document.getElementById('do-print');
+if(printMode){
+  document.body.classList.add('print-mode');
+  slides.forEach(el=>el.classList.add('active'));
+  if(banner) banner.style.display='flex';
+  if(doPrint) doPrint.addEventListener('click',()=>window.print());
+}else{
+  fit();show(i);
+}
+document.getElementById('prev').onclick=()=>show(i-1);
+document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('print-all').onclick=()=>{ const u=new URL(location.href); u.searchParams.set('print','1'); const w=window.open(u.toString(), '_blank', 'noopener,noreferrer'); if(!w){ location.assign(u.toString()); } };
+window.addEventListener('keydown',e=>{
+  if(printMode)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown')show(i+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')show(i-1);
+});
+</script>
+</body>
+</html>
