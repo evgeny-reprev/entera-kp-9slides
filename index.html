@@ -45,8 +45,15 @@ li{margin:12px 0}
 .tbl th{background:var(--surface-muted);font-size:30px;font-weight:700}
 .note{margin-top:24px;font-size:30px;font-weight:600;color:var(--dark)}
 .cta{background:var(--brand-2);color:var(--surface);border-radius:30px;padding:22px 32px;font-size:40px;font-weight:700;display:inline-block}
-.controls{position:fixed;left:16px;right:16px;bottom:10px;display:flex;justify-content:space-between;align-items:center;color:var(--surface);font:500 14px Gilroy,Arial,sans-serif}
+.slide-num{position:absolute;top:96px;right:110px;font-size:26px;font-weight:600;color:var(--muted);letter-spacing:.02em;z-index:3;line-height:1}
+.slide-num b{color:var(--brand);font-weight:800}
+.controls{position:fixed;left:16px;right:16px;bottom:10px;display:flex;align-items:center;gap:16px;color:var(--surface);font:500 14px Gilroy,Arial,sans-serif;z-index:40}
+.controls-progress{flex:1;min-width:120px;height:14px;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.2)}
+.controls-progress-fill{height:100%;width:11.1111%;background:linear-gradient(90deg,var(--brand-2),var(--brand-3));border-radius:999px;transition:width .28s ease}
+.controls-meta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+#counter{min-width:5em;text-align:center;font-weight:700;font-size:13px;opacity:.92}
 button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
+.print-mode .slide-num{top:auto;bottom:10mm;right:11mm;font-size:18px}
 .print-mode .deck{display:block;background:var(--surface)}
 .print-mode .viewport{display:block;width:100%;height:auto;overflow:visible}
 .print-mode .slides{transform:none !important;width:100% !important;max-width:100% !important;height:auto !important;margin:0;background:var(--bg)}
@@ -96,6 +103,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
   .slide .grid2{gap:12px !important;margin-top:12px !important}
   .slide ul{margin:10px 0 0 20px !important}
   .slide ol li{font-size:20px !important;margin:6px 0 !important}
+  .slide .slide-num{font-size:15px !important;top:auto !important;bottom:8mm !important;right:10mm !important}
 }
 </style>
 </head>
@@ -106,6 +114,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </div>
 <div class="deck"><div class="viewport"><main class="slides" id="slides">
 <section class="slide active" data-screen-label="01 Титул"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 1 из 9"><b>1</b> / 9</div>
   <img class="logo" src="assets/logo-entera-from-site.svg" alt="Entera" />
   <h1>Вы теряете сделки, пока ваши менеджеры вбивают спецификации вручную?</h1>
   <div class="kicker">Один быстрый съедает 2 умных</div>
@@ -114,6 +123,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="02 Боль"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 2 из 9"><b>2</b> / 9</div>
   <h2>Каждая ручная спецификация стоит вам:</h2>
   <ul>
     <li><strong>45 минут</strong> рабочего времени менеджера</li>
@@ -126,6 +136,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="03 Решение"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 3 из 9"><b>3</b> / 9</div>
   <h2>Решение</h2>
   <p>AI-бот Entera принимает PDF, фото, Excel → распознаёт любой формат спецификации с точностью <span class="em">98%</span> → сверяет с <strong>1С</strong> → подбирает комплектацию и аналоги → формирует счёт.</p>
   <p>Менеджер только нажимает «Отправить».</p>
@@ -134,6 +145,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="04 Как работает"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 4 из 9"><b>4</b> / 9</div>
   <h2>Как это работает</h2>
   <ol style="margin:0 0 0 30px;padding:0">
     <li style="font-size:33px;margin:10px 0">Клиент кидает файл в <strong>Telegram-бота</strong>.</li>
@@ -149,6 +161,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="05 P&L"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 5 из 9"><b>5</b> / 9</div>
   <h2>Цифры, которые изменят ваш P&amp;L</h2>
   <table class="tbl"><thead><tr><th>Что меняется</th><th>Было</th><th>Стало</th></tr></thead><tbody>
     <tr><td>Время на 1 спецификацию</td><td>45 мин</td><td>2 мин</td></tr>
@@ -160,6 +173,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="06 Бесплатный пилот"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 6 из 9"><b>6</b> / 9</div>
   <h2>Бесплатный пилот — вам нечем рисковать</h2>
   <p style="margin-bottom:10px"><strong>Что вы получаете бесплатно:</strong></p>
   <ul>
@@ -175,6 +189,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="07 Цена"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 7 из 9"><b>7</b> / 9</div>
   <h2>Прозрачная цена — платите только за реально обработанные страницы</h2>
   <div class="card" style="margin-bottom:24px">
     <p style="margin:0 0 8px;font-size:38px"><strong>Стартовый пакет:</strong></p>
@@ -191,6 +206,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="08 Почему Entera"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 8 из 9"><b>8</b> / 9</div>
   <h2>Почему Entera — а не другой бот?</h2>
   <ul>
     <li>Распознаём не просто текст, а <strong>смысл</strong>. Понимаем «аналог», «заменить на», «поставьте 2, если нет 3».</li>
@@ -203,6 +219,7 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 
 <section class="slide" data-screen-label="09 Контакты"><div class="brandbar"></div>
+  <div class="slide-num" aria-label="Слайд 9 из 9"><b>9</b> / 9</div>
   <img class="logo" src="assets/logo-entera-from-site.svg" alt="Entera" />
   <h2>Контакты — запустите пилот за 2 минуты</h2>
   <p>🌐 <strong>Сайт:</strong> https://entera.kz/</p>
@@ -217,7 +234,15 @@ button{background:var(--dark);color:var(--surface);border:0;border-radius:999px;
 </section>
 </main></div></div>
 
-<div class="controls"><button id="prev">← Назад</button><div id="counter">1 / 9</div><div><button id="print-all" title="Откроется версия для печати; затем Ctrl+P → Сохранить как PDF">Скачать PDF (9 слайдов)</button> <button id="next">Вперёд →</button></div></div>
+<div class="controls">
+  <button type="button" id="prev">← Назад</button>
+  <div class="controls-progress" role="progressbar" aria-valuemin="1" aria-valuemax="9" aria-valuenow="1" aria-label="Доля просмотренных слайдов" id="progress-bar">
+    <div class="controls-progress-fill" id="progress-fill"></div>
+  </div>
+  <div id="counter">1 / 9</div>
+  <button type="button" id="print-all" title="Откроется версия для печати; затем Ctrl+P → Сохранить как PDF">Скачать PDF (9 слайдов)</button>
+  <button type="button" id="next">Вперёд →</button>
+</div>
 
 <script>
 const slides=[...document.querySelectorAll('.slide')];
@@ -227,11 +252,24 @@ let i=+(localStorage.getItem('entera-kp-slide')||0);
 const s=document.getElementById('slides');
 const v=document.querySelector('.viewport');
 const c=document.getElementById('counter');
+const nSlides=slides.length;
+let maxSeen=+(localStorage.getItem('entera-kp-maxseen')||-1);
+const progressFill=document.getElementById('progress-fill');
+const progressBar=document.getElementById('progress-bar');
 function fit(){const k=Math.min(v.clientWidth/1920,v.clientHeight/1080);s.style.transform=`scale(${k})`;}
 function show(n){
-  i=(n+slides.length)%slides.length;
+  i=(n+nSlides)%nSlides;
   slides.forEach((el,idx)=>el.classList.toggle('active',idx===i));
-  c.textContent=`${i+1} / ${slides.length}`;
+  c.textContent=`${i+1} / ${nSlides}`;
+  maxSeen=Math.max(maxSeen,i);
+  localStorage.setItem('entera-kp-maxseen',String(maxSeen));
+  const covered=maxSeen+1;
+  const pct=(covered/nSlides)*100;
+  if(progressFill) progressFill.style.width=pct+'%';
+  if(progressBar){
+    progressBar.setAttribute('aria-valuenow',String(covered));
+    progressBar.setAttribute('aria-valuemax',String(nSlides));
+  }
   localStorage.setItem('entera-kp-slide',String(i));
 }
 window.addEventListener('resize',fit);
