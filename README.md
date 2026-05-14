@@ -1,5 +1,11 @@
 # Entera KP — статика для Vercel
 
+**Репозиторий для Import на Vercel:** https://github.com/evgeny-reprev/entera-kp-9slides
+
+Здесь в POS лежит **зеркальная копия** для правок: `index.html` (дека 9 слайдов) + `assets/logo-entera-from-site.svg`. После изменений — скопируй файлы в клон `/home/dev/entera-kp-9slides`, закоммить и `git push`, либо правь сразу в том клоне.
+
+---
+
 Здесь лежит **готовый к деплою** набор: `index.html` (дека 9 слайдов) + `assets/logo-entera-from-site.svg`.
 
 ## Онлайн-ссылка
